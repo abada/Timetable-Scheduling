@@ -1,0 +1,53 @@
+.colorbar {
+  background-color: #619288;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 30px;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+.pagetitle {
+  font-family: Poppins;
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.btns-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btns-wrapper > .btn {
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 15px;
+  margin: 0px 4px;
+}
+
+.dropdown button {
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 15px;
+  margin: 0px 4px;
+}
+.dropdown-menu {
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.dropdown-item {
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dropdown-item:hover {
+  background-color: #ccc;
+}

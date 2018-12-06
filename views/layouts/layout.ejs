@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Timetable Scheduler</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- External Stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Overpass:600|Open+Sans+Condensed:700|Poppins|Roboto|Lato:300,400|Fjalla+One|Source+Sans+Pro|Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Java Scripts to be included in the header -->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/master/master.css">
+    <link rel="stylesheet" href="/styles/master/placeholder.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+    <div id="headwrapper">
+      <div id="headtitle">
+        <p>Timetable Planning</p>
+        <p>Scheduling System</p>
+      </div>
+      <div class="profile">
+        <img class="profile_img" src="/images/32.JPG" />
+      </div>
+      <ul class="nav_menu">
+        <li id="navhome" onclick="redirect('/')"><img src="/images/icons/home.svg" /><span>Home</span></li>
+        <li id="navstaff" role="button" data-toggle="collapse" onclick="toggle_collapse(this)" data-menu="staff" data-target="#staff_submenu"><img src="/images/icons/staff.svg" /><span>Staff</span></li>
+        <div class="collapse submenu" id="staff_submenu">
+          <p onclick="redirect('/staff')" data-submenu="">&rarr; Manage</p>
+          <p onclick="redirect('/staff/new_staff')" data-submenu="new_staff">&rarr; Create</p>
+        </div>
+        <li id="navmod" role="button" data-toggle="collapse" onclick="toggle_collapse(this);" data-menu="module" data-target="#module_submenu"><img src="/images/icons/module.svg" /><span>Module</span></li>
+        <div class="collapse submenu" id="module_submenu">
+          <p onclick="redirect('/module')" data-submenu="">&rarr; Manage</p>
+          <p onclick="redirect('/module/new_module')" data-submenu="new_module">&rarr; Create</p>
+        </div>
+        <li id="navgroup" role="button" data-toggle="collapse" onclick="toggle_collapse(this);" data-menu="group" data-target="#group_submenu"><img src="/images/icons/group.svg" /><span>Group</span></li>
+        <div class="collapse submenu" id="group_submenu">
+          <p onclick="redirect('/group')" data-submenu="">&rarr; Manage</p>
+          <p onclick="redirect('/group/new_group')" data-submenu="new_group">&rarr; Create</p>
+        </div>
+        <li id="navvenue" role="button" data-toggle="collapse" onclick="toggle_collapse(this);" data-menu="venue" data-target="#venue_submenu"><img src="/images/icons/venue.svg" /><span>Venue</span></li>
+        <div class="collapse submenu" id="venue_submenu">
+          <p onclick="redirect('/venue')" data-submenu="">&rarr; Manage</p>
+          <p onclick="redirect('/venue/new_venue')" data-submenu="new_venue">&rarr; Create</p>
+        </div>
+        <li id="navplanner" role="button" data-toggle="collapse" onclick="toggle_collapse(this);" data-menu="planner" data-target="#planner_submenu"><img src="/images/icons/planner.svg" /><span>Planner (Schedule)</span></li>
+        <div class="collapse submenu" id="planner_submenu">
+          <p onclick="redirect('/planner/by_timeslot')" data-submenu="by_timeslot">&rarr; By Timeslots</p>
+          <p onclick="redirect('/planner/by_staff')" data-submenu="by_staff">&rarr; By Staffs</p>
+        </div>
+      </ul>
+      <!--<table id="navmenu">-->
+        <!--<tr>-->
+          <!--<td id="navhome" onclick="redirect('/')">Home</td>-->
+          <!--<td id="navstaff" onclick="redirect('/staffs/main')">Staff</td>-->
+          <!--<td>-->
+            <!--<span id="navmod" onclick="redirect('/module')">Module</span>-->
+            <!--<div class="dropdown-content">-->
+              <!--<p onclick="redirect('/module')">View/Edit</p>-->
+              <!--<p onclick="redirect('/module/addnew')">Add New</p>-->
+            <!--</div>-->
+          <!--</td>-->
+          <!--<td id="navschedule" onclick="redirect('/planner')">Schedule</td>-->
+          <!--<td>-->
+            <!--<span id="navimport" onclick="redirect('/import')">Import</span>-->
+            <!--<div class="dropdown-content-right">-->
+              <!--<p onclick="redirect('/import/STARS')">STARS</p>-->
+              <!--<p onclick="redirect('/import/module')">Modules</p>-->
+              <!--<p onclick="redirect('/import/staff')">Staffs</p>-->
+              <!--<p onclick="redirect('/import/group')">Groups</p>-->
+            <!--</div></td>-->
+          <!--<td>-->
+            <!--<span id="navexport" onclick="redirect('/export')">Export</span>-->
+            <!--<div class="dropdown-content-right">-->
+              <!--<p onclick="redirect('/export/STARS')">STARS</p>-->
+              <!--<p onclick="redirect('/export/module')">Modules</p>-->
+              <!--<p onclick="redirect('/export/staff')">Staffs</p>-->
+              <!--<p onclick="redirect('/export/group')">Groups</p>-->
+            <!--</div></td>-->
+        <!--</tr>-->
+      <!--</table>-->
+    </div>
+    <div class="placeholder_main">
+      <%- body %>
+    </div>
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like React, Vue.js, Angular, Ember, and Backbone
+        require that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different view engine (handlebars, dust, pug/jade, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+
+    <!--
+        Server-side View Locals
+        ========================
+
+        Sometimes, it's convenient to get access to your server-side view locals from
+        client-side JavaScript.  This can improve page load times, remove the need for
+        extra AJAX requests, and make your client-side code easier to understand and
+        to maintain.  Sails provides a simple mechanism for accessing dynamic view
+        locals: the "exposeLocalsToBrowser()" view partial.
+
+        For more information on using this built-in feature, see:
+        https://sailsjs.com/docs/concepts/views/locals#?escaping-untrusted-data-using-exposelocalstobrowser
+
+    -->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <!--SCRIPTS-->
+    <script src="/dependencies/sails.io.js"></script>
+    <script src="/js/master/master.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

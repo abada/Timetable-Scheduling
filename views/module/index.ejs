@@ -1,0 +1,161 @@
+<script type="text/javascript" src="/js/module/main.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Overpass:600|Open+Sans+Condensed:700|Poppins|Roboto" rel="stylesheet">
+<link href="/styles/module/master.css" type="text/css" rel="stylesheet" />
+<link href="/styles/module/main.css" type="text/css" rel="stylesheet" />
+
+<div class="placeholder_main">
+  <div class="colorbar">
+    <div class="contwrapper">
+      <p class="pagetitle">Module Management</p>
+      <small style="font-family: Poppins;">View and edit modules in this webpage.</small>
+    </div>
+
+    <div class="btns-wrapper">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="export_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="/images/icons/export.svg" />
+          <p style="margin-left: 5px;">Export</p>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="export_dropdown_btn">
+          <a class="dropdown-item" onclick="export_to_excel();">To Excel (Modules w/Details)</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="import_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="/images/icons/import_2.svg" />
+          <p style="margin-left: 5px;">Import</p>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="import_dropdown_btn">
+          <a class="dropdown-item" onclick="select_file('#module_file');">From Excel (Modules w/Details)</a>
+        </div>
+      </div>
+
+      <form action="/module/import_excel" enctype="multipart/form-data" method="POST">
+        <input type="file" id="module_file" name="moduleFile" onchange="submit_file('#module_submit_btn')" formenctype="multipart/form-data" accept=".xlsx" style="display: none;" />
+        <input type="submit" id="module_submit_btn" style="display: none;" />
+      </form>
+
+      <form action="/lesson/uploadFile" enctype="multipart/form-data" method="POST">
+        <input type="file" id="lesson_file" name="lessonFile" onchange="submit_file('#lesson_submit_btn');" formenctype="multipart/form-data" accept=".txt" style="display: none;" />
+        <input type="submit" id="lesson_submit_btn" style="display: none;" />
+      </form>
+
+      <button class="btn btn-primary" onclick="redirect('/module/new_module');">Create Module</button>
+    </div>
+  </div>
+  <div class="content_placeholder">
+    <div class="container">
+      <div class="row module_header">
+        <div class="col-mod">Module</div>
+        <div class="col-sm">Academic Units</div>
+        <div class="col-sm">Cohort Size</div>
+        <div class="col-sm">Lesson Types</div>
+        <div class="col-sm">Actions</div>
+      </div>
+      <% _.each(modules, function(module, index) {%>
+      <div class="row module" id="<%= module.code %>">
+        <div class="col-mod module_code">
+          <div class="programme_code_letters <% if ((module.code).slice(0,2) == "CZ") { %>cz_mod<%} else if ((module.code).slice(0,2) == "CE") {%>ce_mod<%} else {%>others_mod<%}%>"><%= (module.code).slice(0,2) %></div>
+          <div style="display: flex; flex-direction: column;">
+            <div class="programme_code_num"><%= (module.code).slice(2) %></div>
+            <div class="module_name"><%= module.name %></div>
+          </div>
+        </div>
+        <div class="col-sm module_au">
+          <div class="au_box">AU</div>
+          <div class="au" style="margin-left: 5px;"><%= module.academic_units %></div>
+        </div>
+        <div class="col-sm module_cohort">
+          <div class="au_box">CS</div>
+          <div class="cohort" style="margin-left: 5px;"><%= module.cohort_size %></div>
+        </div>
+        <div class="col-sm lesson_types">
+          <div class="au_box">T</div>
+          <div style="display: flex; flex-wrap: wrap;" class="ltypebox">
+            <% _.each(module.lesson_types, function(lt, index2) {%>
+            <!--<% if (index2 != 0) { %>,&nbsp;<%}%>-->
+            <span class="ltype" style="margin-left: 5px;"><%= lt.lesson_type %></span>
+            <% });%>
+          </div>
+        </div>
+        <div class="col-sm action_btns">
+          <div class="au_box">A</div>
+          <img style="cursor: pointer; margin-left: 5px;" src="/images/icons/edit.svg" onclick="edit_module_details(this.parentNode.parentNode)" />&emsp;
+          <img style="cursor: pointer;" src="/images/icons/delete.svg" onclick="delete_module(this.parentNode.parentNode)" />
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <div class="modal fade" id="edit_module_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal_label">Edit Module Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="display: grid;grid-template-columns: max-content auto;grid-column-gap: 2%;grid-row-gap: 10px;align-items: center;">
+            <label for="modulecode">Module Code:</label>
+            <input id="modulecode" type="text" name="module_code" class="form-control" readonly />
+            <label for="modulename">Module Name:</label>
+            <input id="modulename" type="text" name="module_name" class="form-control" />
+          </div>
+          <div style="display: grid;grid-template-columns: 48% 48%;grid-column-gap: 4%;margin: 20px 0px;">
+            <label for="moduleau">Module AU:</label>
+            <label for="modulecs">Module Cohort Size:</label>
+            <input id="moduleau" type="number" name="module_au" class="form-control" min="1" max="20" onkeyup="if(this.value > 20 || this.value < 1) this.value = null;"/>
+            <input id="modulecs" type="number" name="module_cohort" class="form-control" min="1" onkeyup="if(this.value < 1) this.value = null;" />
+          </div>
+          <div class="dropdown-divider"></div>
+          <label>Lesson Types:</label>
+          <div class="modal_lesson_types">
+
+          </div>
+
+          <div class="mods_options" style="display: grid;grid-template-columns: 48% 48%;grid-column-gap: 4%;margin: 10px 0px;">
+            <select class="form-control" name="module_select" id="modal_lesson_types_select">
+            </select>
+            <button class="btn btn-dark" onclick="add_lesson_type();">Add</button>
+          </div>
+          <input class="form-control" type="text" id="custom_type_field" name="custom_type_field" placeholder="Lesson Type Name" style="margin: 10px 0px;" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="save_details_changes();">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="export_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal_label">Export Modules w/Details as Excel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="total_modules_label"></p>
+          <div class="form-group">
+            <label for="file_name_input">Save As (Filename):</label>
+            <input type="text" class="form-control" id="export_filename" placeholder="TPS_Modules_Details (Leave blank as default)">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="exportAs()">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

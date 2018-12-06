@@ -1,0 +1,411 @@
+#headwrapper {
+  width: 50px;
+}
+#headtitle p {
+  display: none;
+}
+.profile {
+  padding: 0px;
+}
+.profile_img {
+  transform: scale(0.25);
+}
+.nav_menu li {
+  padding: 15px;
+}
+.nav_menu > li > span {
+  display: none;
+}
+.nav_menu > .submenu {
+  display: none !important;
+}
+
+.options_wrapper {
+  display: none;
+}
+
+.header-title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.planner {
+  display: flex;
+  overflow: auto;
+}
+
+.pre_planner {
+
+}
+
+.pre_planner .header {
+  display: flex;
+}
+
+.post_planner .day {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  font-family: Poppins;
+  font-weight: 600;
+}
+
+#weekly_planner .day_group .title {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  text-orientation: upright;
+  writing-mode: vertical-lr;
+  align-items: center;
+  background-color: white;
+  font-family: Poppins;
+  font-weight: 600;
+}
+
+.post_planner .day .time_slots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 15px;
+  min-width: 100px;
+}
+
+.post_planner .day .time_slots p {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+
+#weekly_planner {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#weekly_planner .header {
+  display: flex;
+  flex-direction: row;
+}
+
+.header .day_title {
+  padding: 15px;
+  text-align: center;
+  background-color: #A7414A;
+  border-bottom: 5px solid #6A8A82;
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 15px;
+  min-width: 200px;
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
+}
+
+#weekly_planner .planner_content {
+  display: flex;
+  flex-direction: column;
+}
+
+#weekly_planner .planner_content .day_group {
+  display: flex;
+  border-bottom: 5px solid #ccc;
+}
+/*#weekly_planner .content_placeholder .content_group::after {*/
+/*content: '';*/
+/*height: 1px;*/
+/*margin: 3px 0px;*/
+/*background-image:-webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);*/
+/*}*/
+
+#weekly_planner .planner_content .content_group .event_time {
+  width: 100%;
+  font-size: 16px;
+  font-family: Poppins;
+  padding: 5px 10px;
+  font-weight: 600;
+  background-color: #e0e0e0;
+}
+
+/*#weekly_planner .content_placeholder .content_group:nth-of-type(2n-1) {*/
+/*background-color: #C2D3DA;*/
+/*}*/
+/*#weekly_planner .content_placeholder .content_group:nth-of-type(2n) {*/
+/*background-color: #F1F3F2;*/
+/*}*/
+
+#weekly_planner .planner_content .day_placeholder {
+  display: flex;
+  flex-direction: row;
+  min-height: 50px;
+}
+
+#weekly_planner .day_group .time_wrapper .day_placeholder .time_title {
+  display: flex;
+  min-width: 80px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: 1px solid white;
+}
+
+#weekly_planner .planner_content .day_placeholder .events_group {
+  position: relative;
+  min-width: 200px;
+  background-color: rgba(255,255,255,0.6);
+  padding: 2px;
+  cursor: pointer;
+}
+
+#weekly_planner .planner_content .day_placeholder:nth-last-child(n+2) .events_group {
+  border-bottom: 1px solid #c0c0c0;
+}
+#weekly_planner .planner_content .day_placeholder .events_group:nth-child(2) {
+  border-left: 5px solid #c0c0c0;
+}
+#weekly_planner .planner_content .day_placeholder .events_group:nth-child(n+3) {
+  border-left: 1px solid #c0c0c0;
+}
+#weekly_planner .planner_content .day_placeholder .events_group:nth-last-child(1) {
+  border-right: 5px solid #c0c0c0;
+}
+
+#weekly_planner .planner_content .day_placeholder .show_more_btn {
+  position: absolute;
+  bottom: 3px;
+  right: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #46211a;
+}
+
+#weekly_planner .planner_content .day_placeholder .show_more_btn:hover {
+  text-decoration: underline;
+}
+
+#weekly_planner .planner_content .day_placeholder .events_group .single_event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  font-size: 12px;
+  padding: 5px 2px;
+  font-family: Tahoma;
+  cursor: grabbing;
+  text-transform: uppercase;
+}
+#weekly_planner .planner_content .day_placeholder .events_group .single_event:hover {
+  box-shadow: 1px 1px 1px #c0c0c0;
+}
+.event_more_dropdown {
+  font-family: "Poppins";
+}
+.event_more_dropdown button {
+  cursor: pointer;
+}
+
+.single_event[data-lessontype='LEC'] {
+  border-left: 5px solid red;
+  color: red;
+}
+.single_event[data-lessontype='TUT'] {
+  border-left: 5px solid blue;
+  color: blue;
+}
+.single_event[data-lessontype='LAB'] {
+  border-left: 5px solid green;
+  color: green;
+}
+
+#weekly_planner .planner_content .day_placeholder .events_group .pagination {
+  width: 100%;
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  justify-content: center;
+}
+#weekly_planner .planner_content .day_placeholder .events_group .pagination .page-item {
+  margin: 0px 2px;
+}
+#weekly_planner .planner_content .day_placeholder .events_group .pagination .page-item .page-x {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+#weekly_planner .planner_content .day_placeholder .events_group .pagination .page-item .page-x::before,#weekly_planner .content_placeholder .day_placeholder .events_group .pagination .page-item .page-x::after {
+  content: '';
+  display:block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #336b87;
+  transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+#weekly_planner .planner_content .day_placeholder .events_group .pagination .page-item .page-x::before {
+  background: #336b87;
+  transform: scale(0.5);
+}
+#weekly_planner .planner_content .day_placeholder .events_group .pagination .page-item .active::before {
+  transform: scale(0.8);
+}
+#weekly_planner .planner_content .day_placeholder .events_group .pagination .page-item .active::after {
+  transform: scale(0.5);
+}
+
+
+@media screen and (max-width: 700px){
+
+}
+
+/* Horizontal Rule style */
+hr {
+  border: 0;
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid #e9ecef;
+  text-align: center;
+}
+
+/* Modal style */
+.modal-title {
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 600;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+}
+.modal-body label {
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+  margin-bottom: 0;
+}
+.modal-body .ltypewrapper {
+  display: grid;
+  grid-template-columns: fit-content(50%) auto;
+  grid-column-gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.modal-footer .btn {
+  font-family: "Poppins";
+}
+.weeks_chooser {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  row-gap: 5px;
+  margin: 10px 0px;
+}
+.venue_group_wrapper {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-column-gap: 10px;
+  margin: 10px 0px;
+}
+.modal_time_wrapper {
+  display: grid;
+  grid-template-columns: 31% 31% 31%;
+  grid-column-gap: 10px;
+  margin: 10px 0px;
+}
+
+/* Select Style */
+.custom_select {
+  margin: 5px 0px;
+}
+
+/* Radio Button Style */
+.custom_radio_button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  position: relative;
+  background-color: #eee;
+  color: #666;
+  height: 25px;
+  width: 25px;
+  border: 0;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-right: 4px;
+  outline: none;
+}
+.custom_radio_button:checked::before {
+  position: absolute;
+  font: 16px/1 'Overpass Mono', monospace;
+  left: 8px;
+  top: 3px;
+  content: '\02143';
+  transform: rotate(40deg);
+}
+.custom_radio_button:hover {
+  background-color: #ccc;
+}
+.custom_radio_button:checked {
+  background-color: #eee;
+}
+.custom_radio_button ~ label {
+  -webkit-font-smoothing: antialiased;
+  font: 400 14px/1.7 'Overpass Mono', monospace;
+  color: #666;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+/*Checkboxes styles*/
+.custom_checkbox { display: none; }
+
+.custom_checkbox + label {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.custom_checkbox:disabled + label:before {
+  content: '';
+  border-radius: 0;
+  opacity: 1;
+  background-color: #bbb;
+}
+
+.custom_checkbox + label:before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #aaa;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+.custom_checkbox:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

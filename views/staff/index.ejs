@@ -1,0 +1,189 @@
+<script type="text/javascript" src="/js/staff/master.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="/styles/staff/master.css" />
+<link rel="stylesheet" href="/styles/staff/main.css" />
+
+<div class="colorbar">
+  <div class="contwrapper">
+    <p class="pagetitle">Staff Management</p>
+    <small style="font-family: Poppins;">View and edit staffs in this webpage.</small>
+  </div>
+
+  <div class="btns-wrapper">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="export_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/images/icons/export.svg" />
+        <p style="margin-left: 5px;">Export</p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="export_dropdown_btn">
+        <a class="dropdown-item" onclick="export_to_excel();">To Excel (Staffs w/Details)</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="import_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/images/icons/import_2.svg" />
+        <p style="margin-left: 5px;">Import</p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="import_dropdown_btn">
+        <a class="dropdown-item" onclick="select_file('#staff_file');">From Excel (Staffs w/Details)</a>
+      </div>
+    </div>
+
+    <form action="/staff/import_excel" enctype="multipart/form-data" method="POST">
+      <input type="file" id="staff_file" name="staffFile" onchange="submit_file($(this).siblings('input[type=submit]'))" formenctype="multipart/form-data" accept=".xlsx" style="display: none;" />
+      <input type="submit" id="staff_submit_btn" style="display: none;" />
+    </form>
+    <button onclick="window.redirect('/staff/new_staff')" class="btn btn-primary">Add New Staff</button>
+  </div>
+</div>
+
+<div class="content_placeholder">
+  <% if (staffs.length == 0) { %>
+  <p>There are no staffs added yet. Import them from excel or add them?</p>
+  <% } %>
+  <% _.each(staffs, function(staff, index) { %>
+  <div class="staff_box" data-staffindex="<%= (index+1) %>">
+    <img class="staff_img" src="/images/default-profile-picture.jpg" />
+      <div class="staff_details">
+      <p class="staff_designation"><%= staff.designation %></p>
+      <p class="staff_name" style="font-weight: bold;" data-lastname="<%= staff.last_name %>"><%= staff.name %></p>
+      <p class="staff_email"><%= staff.staff_id %>@ntu.edu.sg</p>
+      <p class="staff_school"><%= staff.school %></p>
+      <p>
+        <p class="staff_room_no"><%= staff.room_no %></p>
+        <p class="staff_ext_no"><%= staff.ext_no %></p>
+        Assigned Modules:
+        <p class="staff_assigned_mods"><% _.each(staff.modules_assigned, function(assignment, index) { %><% if (index > 0) { %>,<% } %> <%= assignment.code %><% }); %></p>
+      </p>
+
+      <img id="staff_more_btn" src="/images/icons/more_3.svg" style="cursor: pointer; align-self: flex-end;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
+      <div class="dropdown-menu edit-dropdown-menu" aria-labelledby="staff_more_btn">
+        <button class="dropdown-item" type="button" onclick="edit_staff_details(this.parentNode.parentNode);">Edit</button>
+        <button class="dropdown-item" type="button" onclick="delete_staff(this.parentNode.parentNode);">Delete</button>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+  <!--<div class="content_wrapper">-->
+    <!--<div class="staff_details_header">-->
+      <!--<p></p>-->
+      <!--<p>Name</p>-->
+      <!--<p>Email</p>-->
+      <!--<p>School</p>-->
+      <!--<p>Other Details</p>-->
+    <!--</div>-->
+    <!--<div class="staff_details">-->
+      <!--<% if (staffs.length == 0) { %>-->
+      <!--<div class="staff" style="display: flex;">-->
+        <!--<p>There are no staffs added yet. Import them from excel or add them?</p>-->
+      <!--</div>-->
+      <!--<% } %>-->
+      <!--<% _.each(staffs, function(staff, index) { %>-->
+      <!--<div class="staff" data-staffindex="<%= (index+1) %>">-->
+        <!--<img src="/images/default-profile-picture.jpg" class="staff_img" />-->
+        <!--<div class="staff_nd">-->
+          <!--<p class="staff_designation"><%= staff.designation %></p>-->
+          <!--<p class="staff_name" data-lastname="<%= staff.last_name %>"><%= staff.name %></p>-->
+        <!--</div>-->
+        <!--<p class="staff_email"><%= staff.staff_id %>@ntu.edu.sg</p>-->
+        <!--<p class="staff_school"><%= staff.school %></p>-->
+        <!--<div class="other_details">-->
+          <!--<p>Room No: <span class="staff_room_no"><%= staff.room_no %></span></p>-->
+          <!--<p>Ext No: <span class="staff_ext_no"><%= staff.ext_no %></span></p>-->
+          <!--<p>Assigned Modules:-->
+            <!--<span class="staff_assigned_mods">-->
+              <!--<% _.each(staff.staff_allocations, function(assignment, index) { %>-->
+              <!--<% if (index > 0) { %>,<% } %> <%= assignment.module_code %>-->
+              <!--<% }); %>-->
+            <!--</span>-->
+          <!--</p>-->
+        <!--</div>-->
+        <!--<img id="staff_more_btn" src="/images/icons/more_2.svg" style="cursor: pointer; justify-self: center;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />-->
+        <!--<div class="dropdown-menu edit-dropdown-menu" aria-labelledby="staff_more_btn">-->
+          <!--<button class="dropdown-item" type="button" onclick="edit_staff_details(this.parentNode.parentNode);">Edit</button>-->
+          <!--<button class="dropdown-item" type="button" onclick="delete_staff(this.parentNode.parentNode);">Delete</button>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<% }); %>-->
+    <!--</div>-->
+  <!--</div>-->
+
+
+  <div class="modal fade" id="export_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal_label">Export Staffs w/Details as Excel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="total_staff_label"></p>
+          <div class="form-group">
+            <label for="file_name_input">Save As (Filename):</label>
+            <input type="text" class="form-control" id="export_filename" placeholder="TPS_Staff_Details (Leave blank as default)">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="exportAs()">Export</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="edit_staff_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal_label">Edit Staff Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="display: grid; grid-template-columns: 60% 35%; grid-column-gap: 5%;">
+            <label for="staffname">Full Name:</label>
+            <label for="stafflastname">Last Name:</label>
+            <input id="staffname" type="text" name="staff_name" class="form-control" />
+            <input id="stafflastname" type="text" name="staff_lastname" class="form-control" />
+          </div>
+          <label for="staffemail">Staff Email:</label>
+          <input id="staffemail" type="text" name="staff_email" class="form-control" readonly />
+          <div style="display: grid; grid-template-columns: 47% 47%; grid-column-gap: 6%;">
+            <label for="staffdesignation">Staff Designation:</label>
+            <label for="staffschool">School:</label>
+            <input id="staffdesignation" type="text" name="staff_designation" class="form-control" />
+            <input id="staffschool" type="text" name="staff_school" class="form-control" />
+          </div>
+          <div style="display: grid; grid-template-columns: 47% 47%; grid-column-gap: 6%; margin-bottom: 1.5rem;">
+            <label for="staffroom">Room no:</label>
+            <label for="staffext">Ext No:</label>
+            <input id="staffroom" type="text" name="staff_room" class="form-control" />
+            <input id="staffext" type="text" name="staff_ext" class="form-control" />
+          </div>
+          <div class="dropdown-divider"></div>
+          <label>Modules Assigned:</label>
+          <div class="mods_assigned">
+
+          </div>
+          <div class="mods_options">
+            <select class="form-control" name="module_select">
+              <% _.each(modules, function(module) { %>
+              <option value="<%= module.code %>"><%= module.code %> - <%= module.name %></option>
+              <% }); %>
+            </select>
+            <button class="btn btn-dark" onclick="add_mod_assignment();">Add</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="save_details_changes();">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

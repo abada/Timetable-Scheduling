@@ -1,0 +1,63 @@
+@-webkit-keyframes slide-in {
+  0% { opacity: 0; -webkit-transform: translateY(-100%); }
+  100% { opacity: 1; -webkit-transform: translateY(0); }
+}
+@-moz-keyframes slide-in {
+  0% { opacity: 0; -webkit-transform: translateY(-100%); }
+  100% { opacity: 1; -webkit-transform: translateY(0); }
+}
+
+@font-face {
+  font-family: "Avenir-Book";
+  src: url("/fonts/Avenir-Book.otf");
+}
+
+#import-staff-btn::after {
+  content: 'From Excel';
+  margin-left: 5px;
+  text-transform: uppercase;
+  display: none;
+  -webkit-animation: slide-in .3s ease-out;
+}
+#import-lesson-btn::after {
+  content: 'Lesson Details';
+  margin-left: 5px;
+  text-transform: uppercase;
+  display: none;
+  -webkit-animation: slide-in .3s ease-out;
+}
+#import-staff-btn:hover::after, #import-lesson-btn:hover::after {
+  display: inline;
+  visibility: visible;
+}
+
+.content_placeholder {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}

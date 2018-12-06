@@ -1,0 +1,44 @@
+@-webkit-keyframes slide-in {
+  0% { opacity: 0; -webkit-transform: translateX(100%); }
+  100% { opacity: 1; -webkit-transform: translateX(0); }
+}
+@-moz-keyframes slide-in {
+  0% { opacity: 0; -webkit-transform: translateX(100%); }
+  100% { opacity: 1; -webkit-transform: translateX(0); }
+}
+
+.content_placeholder {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@font-face {
+  font-family: 'Social Gothic';
+  src: url("/fonts/Social Gothic Regular.otf");
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}

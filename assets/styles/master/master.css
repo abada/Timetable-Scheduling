@@ -1,0 +1,150 @@
+html, body, img, form, textarea, input, fieldset, div, p, ul, li, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, pre, code {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  text-align: left;
+  font-size: 1em;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+@font-face {
+  font-family: 'Uni Sans Thin';
+  src: url("/fonts/Uni Sans Thin.otf");
+}
+
+
+#headwrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #2d4262;
+  align-items: center;
+  width: 250px;
+  transition: width 1s ease 0s;
+}
+#headtitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: 'Uni Sans Thin';
+  font-size: 28px;
+  text-align: right;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px #555;
+  color: white;
+  padding: 10px 20px;
+  min-height: 100px;
+}
+
+.profile {
+  padding: 40px 10px;
+}
+.profile_img {
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+
+.nav_menu {
+  list-style-type: none;
+  width: 100%;
+}
+.nav_menu li {
+  display: flex;
+  padding: 10px 30px;
+  font-weight: 300;
+  color: white;
+}
+.nav_menu li:hover, .nav_menu > .submenu > p:hover {
+  cursor: pointer;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.nav_menu > li > span {
+  margin-left: 15px;
+}
+
+.nav_menu > .submenu > p {
+  padding: 0px 30px;
+  font-family: "Segoe UI";
+  color: white;
+  font-weight: lighter;
+}
+
+.placeholder_main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  background-image: url("/images/bgpattern4.png");
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  #headwrapper {
+    width: 50px;
+  }
+  #headtitle p {
+    display: none;
+  }
+  .profile {
+    padding: 0px;
+  }
+  .profile_img {
+    transform: scale(0.25);
+  }
+  .nav_menu li {
+    padding: 15px;
+  }
+  .nav_menu > li > span {
+    display: none;
+  }
+  .nav_menu > .submenu {
+    display: none !important;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  #navicon {
+    display: inline;
+    width: 24px;
+    height: 24px;
+  }
+  #navmenu {
+    display: none;
+  }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+  #navicon {
+    display: inline;
+    width: 24px;
+    height: 24px;
+  }
+  #navmenu {
+    display: none;
+  }
+}
+

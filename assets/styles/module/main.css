@@ -1,0 +1,236 @@
+.container {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.row {
+  margin-bottom: 5px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.col-mod {
+  flex: 0 0 calc((100%/10)*4.5);
+  max-width: calc((100%/10)*4.5);
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.module {
+  padding: 10px 0px;
+}
+.module:hover {
+  background-color: rgba(200,200,200,0.8);
+}
+
+.module_header {
+  font-family: "Poppins";
+  font-size: 1.25em;
+  font-weight: bold;
+  background-color: #c0c0c0;
+}
+
+.module_code {
+  display: flex;
+}
+
+.programme_code_letters {
+  font-family: "Governor";
+  color: white;
+  font-size: 1.4em;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.module_name {
+  flex-wrap: nowrap;
+}
+
+.au_box {
+  font-family: "Governor";
+  color: white;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  background-color: #0c8da0;
+}
+
+.cz_mod {
+  background-color: #697B96;
+}
+
+.ce_mod {
+  background-color: #B65E6A;
+}
+
+.others_mod {
+  background-color: #629389;
+}
+
+.programme_code_num, .module_name {
+  font-family: "Open Sans Condensed";
+  text-transform: uppercase;
+  color: black;
+  font-size: 1em;
+  margin-left: 5px;
+}
+
+.module_au, .module_cohort, .action_btns {
+  font-family: "Open Sans Condensed";
+  color: black;
+  font-size: 1em;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+.lesson_types {
+  font-family: "Open Sans Condensed";
+  color: black;
+  font-size: 1em;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+
+.lesson_wrapper {
+  margin-bottom: 20px;
+}
+
+.lesson_wrapper h3 {
+  font-weight: 200;
+  font-size: 1.5em;
+}
+
+.venue_wrapper, .groups_wrapper {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.possible_venues, .groups_assigned {
+  display: inline-flex;
+  align-items: center;
+  height: 50px;
+  flex: 1;
+  font-family: 'Overpass Mono', monospace;
+  font-size: 0.8em;
+}
+
+.circle-styled {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: rgba(0,0,0,0.2);
+  font-family: 'Overpass Mono', monospace;
+  font-size: 2.5em;
+  text-transform: lowercase;
+  margin-right: 10px;
+}
+
+
+/**
+  Export Modal style
+ */
+#export_modal .modal-title {
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 600;
+}
+#export_modal .modal-body {
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+}
+#export_modal .modal-body input::placeholder {
+  color: rgba(200, 200, 200, 1);
+}
+#export_modal .modal-body .total_modules_label {
+  margin-bottom: 10px;
+}
+
+#export_modal .modal-footer .btn {
+  font-family: "Poppins";
+}
+
+
+/**
+  Edit Module Details Modal
+ */
+#edit_module_modal label {
+  margin-bottom: 0;
+}
+
+#edit_module_modal .modal-title {
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#edit_module_modal .modal-body {
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+}
+
+#edit_module_modal .modal-footer .btn {
+  font-family: "Poppins";
+}
+
+.modal_lesson_types {
+
+}
+
+.custom_mod_style {
+  display: flex;
+  justify-content: space-between;
+  border-left: 5px solid #1e3c72;
+  padding: 10px 5px;
+  margin: 5px 0px;
+  box-shadow: 1px 1px 1px #ccc;
+}
+
+@media (max-width: 576px) {
+
+}
+@media (max-width: 992px) {
+  .row {
+    display: block;
+  }
+  .col-mod {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,147 @@
+.content_placeholder {
+  justify-content: space-evenly;
+}
+
+.staff_box {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 20px 10px;
+  font-family: Poppins;
+  font-size: 75%;
+  margin-bottom: 15px;
+}
+
+.staff_box .staff_img {
+  width: 172.5px;
+  height: 172.5px;
+  align-self: center;
+  margin: 15px 0px;
+}
+
+.staff_box .staff_details {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  width: 75%;
+  word-break: break-word;
+}
+
+.content_wrapper {
+  padding: 20px;
+  flex-direction: column;
+}
+
+.staff_details_header {
+  display: grid;
+  grid-template-columns: 50px 25% 25% 15% auto 30px;
+  padding: 10px 20px;
+  -webkit-box-shadow: 0px 0px 10px -4px black;
+  -moz-box-shadow: 0px 0px 10px -4px black;
+  box-shadow: 0px 0px 10px -4px black;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 1em;
+  align-items: center;
+  min-width: 800px;
+  background-color: white;
+}
+
+.staff {
+  display: grid;
+  grid-template-columns: 50px 25% 25% 15% auto 30px;
+  align-items: center;
+  padding: 15px 20px;
+  margin: 15px 0px;
+  min-width: 800px;
+  -webkit-box-shadow: 0px 0px 10px -4px black;
+  -moz-box-shadow: 0px 0px 10px -4px black;
+  box-shadow: 0px 0px 10px -4px black;
+  font-family: 'Overpass', monospace;
+  font-size: 0.8em;
+  background-color: white;
+}
+
+.staff .staff_img {
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+}
+
+.edit-dropdown-menu {
+  min-width: 5rem;
+}
+
+
+
+/**
+  Export Modal style
+ */
+#export_modal .modal-title {
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 600;
+}
+#export_modal .modal-body {
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+}
+#export_modal .modal-body input::placeholder {
+  color: rgba(200, 200, 200, 1);
+}
+#export_modal .modal-body .total_staff_label {
+  margin-bottom: 10px;
+}
+
+#export_modal .modal-footer .btn {
+  font-family: "Poppins";
+}
+
+
+/**
+  Edit Modal style
+ */
+#edit_staff_modal .modal-title {
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#edit_staff_modal .modal-body {
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+}
+
+#edit_staff_modal label {
+  margin: .5em 0;
+}
+#edit_staff_modal .mods_options {
+  display: grid;
+  grid-template-columns: 82% 15%;
+  grid-column-gap: 3%;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+#edit_staff_modal .mods_assigned {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.custom_mod_style {
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
+  border-left: 5px solid #1e3c72;
+  padding: 10px 5px;
+  margin: 5px 0px;
+  box-shadow: 1px 1px 1px #ccc;
+}
+.custom_mod_style:nth-child(2n) {
+  margin-left: 10px;
+}
+
+#edit_staff_modal .modal-footer .btn {
+  font-family: "Poppins";
+}

@@ -1,0 +1,64 @@
+<script type="text/javascript" src="/js/planner/master.js"></script>
+<script type="text/javascript" src="/js/planner/by_timeslot.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Overpass:600|Open+Sans+Condensed:700|Poppins|Roboto" rel="stylesheet">
+<link href="/styles/master/master.css" rel="stylesheet" />
+<link href="/styles/planner/master.css" rel="stylesheet" />
+<link href="/styles/planner/main.css" rel="stylesheet" />
+
+<div class="placeholder_main">
+  <div class="colorbar">
+    <div class="contwrapper">
+      <p class="pagetitle">Planner Management</p>
+      <small style="font-family: Poppins;">Input details to view planner in time slots.</small>
+    </div>
+
+    <div class="btns-wrapper">
+      <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="import_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="/images/icons/import_2.svg" />
+          <p style="margin-left: 5px;">Import</p>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="import_dropdown_btn">
+          <a class="dropdown-item" onclick="select_file('#stars_file');">&#x2605;STARS File</a>
+        </div>
+      </div>
+
+      <form action="/planner/import_stars" enctype="multipart/form-data" method="POST">
+        <input type="file" id="stars_file" name="starsFile" onchange="submit_file('#stars_submit_btn')" formenctype="multipart/form-data" accept=".txt" style="display: none;" />
+        <input type="submit" id="stars_submit_btn" style="display: none;" />
+      </form>
+    </div>
+  </div>
+
+  <div class="content_placeholder" style="flex-grow: 1; justify-content: space-evenly;">
+    <form action="" method="POST" style="width: 500px; margin: 20px 0px; align-self: center; background-color: white; padding: 50px; border-radius: 2%; border: 1px solid #cccc; font-family: Roboto; font-size: 0.9em;">
+      <div class="form-group">
+        <label for="study_year_sem">Study Year Semester</label>
+        <input type="text" style="font-size: 0.9em;" class="form-control" id="study_year_sem" name="study_year_sem" placeholder="Enter study year and semester. E.g. YYYYSem (20181)" required aria-required="true" />
+      </div>
+      <div class="form-group">
+        <label for="end_time_option">Planner End Time</label>
+        <select class="form-control" id="end_time_option">
+          <option>17:30</option>
+          <option>23:30</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="selected_modules_label">Chosen Modules:</label>
+        <p id="selected_modules_label" style="display: flex; flex-direction: column;"></p>
+      </div>
+
+      <button type="button" onclick="plan(this.parentNode);" class="btn btn-primary">Plan now</button>
+      <button type="submit" class="submit_btn" hidden></button>
+    </form>
+
+    <form action="" method="POST" style="width: 500px; margin: 20px 0px; align-self: center; background-color: white; padding: 50px; border-radius: 2%; border: 1px solid #cccc; font-family: Roboto; font-size: 0.9em;">
+      <div class="form-group">
+        <label for="modules_select">Select Modules to view</label>
+        <div id="modules_select" style="max-height: 600px; overflow: auto; display: flex; flex-direction: column;">
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

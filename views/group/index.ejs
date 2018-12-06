@@ -1,0 +1,119 @@
+<script src="/js/group/main.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="/styles/group/master.css" />
+<link rel="stylesheet" href="/styles/group/main.css" />
+
+<div class="colorbar">
+  <div class="contwrapper">
+    <p class="pagetitle">Group Management</p>
+    <small style="font-family: Poppins;">View and edit groups in this webpage.</small>
+  </div>
+
+  <div class="btns-wrapper">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="export_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/images/icons/export.svg" />
+        <p style="margin-left: 5px;">Export</p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="export_dropdown_btn">
+        <a class="dropdown-item" onclick="export_to_excel();">To Excel</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="import_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/images/icons/import_2.svg" />
+        <p style="margin-left: 5px;">Import</p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="import_dropdown_btn">
+        <a class="dropdown-item" onclick="select_file('#group_file');">From Excel</a>
+      </div>
+    </div>
+
+    <form action="/group/import_excel" enctype="multipart/form-data" method="POST">
+      <input type="file" id="group_file" name="groupFile" onchange="submit_file($(this).siblings('input[type=submit]'))" formenctype="multipart/form-data" accept=".xlsx" style="display: none;" />
+      <input type="submit" id="group_submit_btn" style="display: none;" />
+    </form>
+    <button onclick="window.location.href = '/group/new_group';" class="btn btn-primary">Add Group</button>
+  </div>
+</div>
+
+<div class="content_placeholder" style="flex-grow: 1;">
+  <div class="group_list">
+    <% if (groups.length == 0) { %>
+    <p>There are no existing groups, do you want to add them in the create page?</p>
+    <% } else { %>
+    <div class="group_header">
+      <p>Group Index</p>
+      <p>Group Size</p>
+      <img src="/images/icons/more_3.svg" style="visibility: hidden;" />
+      <p></p>
+    </div>
+    <% _.each(groups, function(group, index) { %>
+    <div class="group_item">
+      <p class="group_index" data-grpindex="<%= group.group_index %>"><%= group.group_index %></p>
+      <p class="group_size"><%= group.group_size %></p>
+      <div>
+        <img id="group_more_btn" src="/images/icons/more_3.svg" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
+        <div class="dropdown-menu edit-dropdown-menu" aria-labelledby="group_more_btn">
+          <button class="dropdown-item" type="button" onclick="edit_group_details(this.parentNode.parentNode.parentNode);">Edit</button>
+          <button class="dropdown-item" type="button" onclick="delete_group(this.parentNode.parentNode.parentNode);">Delete</button>
+        </div>
+      </div>
+    </div>
+    <% }); } %>
+  </div>
+  <img src="/images/homepage_image_9.jpg" height="400" style="align-self: center; margin: 20px 0px;"  />
+</div>
+
+
+<div class="modal fade" id="edit_group_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_label">Edit Group Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="edit_group_index">Group Index</label>
+          <input type="text" style="font-size: 0.9em;" class="form-control" id="edit_group_index" name="group_index" readonly aria-readonly="true" />
+        </div>
+        <div class="form-group">
+          <label for="edit_group_size">Group Size</label>
+          <input type="text" style="font-size: 0.9em;" class="form-control" id="edit_group_size" name="group_size" required aria-required="true" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="save_details_changes();">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="export_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_label">Export Groups w/Details as Excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="total_group_label"></p>
+        <div class="form-group">
+          <label for="file_name_input">Save As (Filename):</label>
+          <input type="text" class="form-control" id="export_filename" placeholder="TPS_Group_Details (Leave blank as default)">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="exportAs()">Export</button>
+      </div>
+    </div>
+  </div>
+</div>

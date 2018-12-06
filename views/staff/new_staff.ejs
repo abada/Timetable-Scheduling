@@ -1,0 +1,52 @@
+<script type="text/javascript" src="/js/staff/master.js"></script>
+<script type="text/javascript" src="/js/staff/new_staff.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="/styles/staff/master.css" />
+<link rel="stylesheet" href="/styles/staff/main.css" />
+
+<div class="colorbar">
+  <div class="contwrapper">
+    <p class="pagetitle">Staff Management</p>
+    <small style="font-family: Poppins;">Create new staff in this webpage.</small>
+  </div>
+
+  <div class="btns-wrapper">
+    <button onclick="window.redirect('/staff')" class="btn btn-primary">Manage Staff</button>
+  </div>
+</div>
+
+<div class="content_placeholder" style="flex-grow: 1;">
+  <form action="" method="POST" style="width: 500px; margin: 20px 0px; align-self: center; background-color: white; padding: 50px; border-radius: 2%; border: 1px solid #cccc; font-family: Roboto; font-size: 0.9em;">
+    <div class="form-group">
+      <label for="staffid">Staff ID</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="staffid" name="staffid" placeholder="Enter NTU Staff ID for login purposes" required aria-required="true" />
+    </div>
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="name" name="name" placeholder="Enter your full name" required aria-required="true" />
+    </div>
+    <div class="form-group">
+      <label for="lname">Last Name</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="lname" name="lastname" placeholder="Enter your Last Name/Surname" required aria-required="true" />
+    </div>
+    <div class="form-group">
+      <label for="school">School</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="school" name="school" placeholder="Enter the school you're tied with"/>
+    </div>
+    <div class="form-group">
+      <label for="designation">Designation</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="designation" name="designation" placeholder="Enter your designation (Assoc Prof, Dr, etc.)"/>
+    </div>
+    <div class="form-group">
+      <label for="roomno">Room Number</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="roomno" name="room" placeholder="Enter your room number"/>
+    </div>
+    <div class="form-group">
+      <label for="extno">Extension Number</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="extno" name="ext" placeholder="Enter your extension(phone) number"/>
+    </div>
+    <button type="button" onclick="add_new_staff(this.parentNode);" class="btn btn-primary">Add Staff</button>
+    <button type="submit" class="submit_btn" hidden></button>
+  </form>
+  <img src="/images/homepage_image_7.jpg" height="500" style="align-self: center; margin: 20px 0px;" />
+</div>

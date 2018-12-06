@@ -1,0 +1,43 @@
+<link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Overpass:300|Open+Sans+Condensed:700|Poppins|Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="/styles/schedule/master.css" rel="stylesheet" />
+<link href="/styles/schedule/main.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="/js/schedule/master.js"></script>
+
+<div class="placeholder_main">
+  <div class="colorbar">
+    <p class="pagetitle">Planner Management</p>
+    <div class="btns-wrapper">
+      <button class="btn btn-primary" onclick="editPlanner();">View/Edit Planner</button>
+    </div>
+  </div>
+
+  <div class="content_wrapper">
+    <div class="planner_options">
+      <div class="other_option">
+        <label for="end_time_option">Planner end time:</label>
+        <select class="form-control" id="end_time_option">
+          <option>17:30</option>
+          <option>23:30</option>
+        </select>
+        <label for="study_year_sem">Study year & semester:</label>
+        <input type="text" id="study_year_sem" style="display: inline; width: fit-content;" class="form-control" placeholder="YYYYsem (20181)" />
+      </div>
+
+      <div class="modules_option_header">
+        <p>Choose the modules to be displayed in the planner.</p>
+        <p id="selected_modules_label">0 Module selected</p>
+      </div>
+      <div class="modules_option">
+        <% _.each(modules, function(module, index) { %>
+        <div class="module_group">
+          <input id="<%= module.code %>" name="<%= module.code %>" type="checkbox" />
+          <label for="<%= module.code %>"><span style="font-weight: bold;"><%= (index+1) %>.</span> <%= module.code %> - <%= module.name %></label>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</div>

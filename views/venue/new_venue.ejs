@@ -1,0 +1,39 @@
+<script src="/js/venue/new_venue.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="/styles/group/master.css" />
+<link rel="stylesheet" href="/styles/group/main.css" />
+
+<div class="colorbar">
+  <div class="contwrapper">
+    <p class="pagetitle">Venue Management</p>
+    <small style="font-family: Poppins;">Create new venue in this webpage.</small>
+  </div>
+
+  <div class="btns-wrapper">
+    <button onclick="window.location.href = '/venue';" class="btn btn-primary">Manage Venue</button>
+  </div>
+</div>
+
+<div class="content_placeholder" style="flex-grow: 1;">
+  <form action="" method="POST" style="width: 500px; margin: 20px 0px; align-self: center; background-color: white; padding: 50px; border-radius: 2%; border: 1px solid #cccc; font-family: Roboto; font-size: 0.9em;">
+    <div class="form-group">
+      <label for="venue_name">Venue Name</label>
+      <input type="text" style="font-size: 0.9em;" class="form-control" id="venue_name" name="venue_name" placeholder="Enter Venue name (e.g. LT2A)" required aria-required="true" />
+    </div>
+    <div class="form-group">
+      <label for="venue_type">Venue Type</label>
+      <select style="font-size: 0.9em;" class="form-control" id="venue_type" name="venue_type">
+        <option value="LT">Lecture Theater</option>
+        <option value="TR">Tutorial Room</option>
+        <option value="LAB">Laboratory</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="venue_capacity">Venue Capacity</label>
+      <input type="number" style="font-size: 0.9em;" class="form-control" id="venue_capacity" name="venue_capacity" placeholder="Enter the capacity of the venue." min="1" required aria-required="true" />
+    </div>
+    <button type="button" onclick="add_new_venue(this.parentNode);" class="btn btn-primary">Create Venue</button>
+    <button type="submit" class="submit_btn" hidden></button>
+  </form>
+  <img src="/images/homepage_image_10.jpg" height="600" style="align-self: center; margin: 20px 0px;" />
+</div>

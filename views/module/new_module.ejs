@@ -1,0 +1,93 @@
+<script type="text/javascript" src="/js/module/new_module.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Overpass:600|Open+Sans+Condensed:700|Poppins|Roboto" rel="stylesheet">
+<link href="/styles/module/master.css" type="text/css" rel="stylesheet" />
+<link href="/styles/module/main.css" type="text/css" rel="stylesheet" />
+
+<div class="placeholder_main">
+  <div class="colorbar">
+    <div class="contwrapper">
+      <p class="pagetitle">Module Management</p>
+      <small style="font-family: Poppins;">Create new module in this webpage.</small>
+    </div>
+
+    <div class="btns-wrapper">
+      <button class="btn btn-primary" onclick="redirect('/module');">Manage Modules</button>
+    </div>
+  </div>
+
+  <div class="content_placeholder" style="flex-grow: 1; justify-content: space-evenly;">
+    <form action="" method="POST" style="width: 500px; margin: 20px 0px; align-self: center; background-color: white; padding: 50px; border-radius: 2%; border: 1px solid #cccc; font-family: Roboto; font-size: 0.9em;">
+      <div class="form-group">
+        <label for="modulecode">Module Code</label>
+        <input type="text" style="font-size: 0.9em;" class="form-control" id="modulecode" name="modulecode" placeholder="Enter module code. E.g. CZ1003" required aria-required="true" />
+      </div>
+      <div class="form-group">
+        <label for="name">Module Name</label>
+        <input type="text" style="font-size: 0.9em;" class="form-control" id="name" name="name" placeholder="Enter module name" required aria-required="true" />
+      </div>
+      <div class="form-group">
+        <label for="au">Academic Units</label>
+        <input type="text" style="font-size: 0.9em;" class="form-control" id="au" name="au" placeholder="Enter number of academic units" required aria-required="true" />
+      </div>
+      <div class="form-group">
+        <label for="cohort">Cohort Size</label>
+        <input type="text" style="font-size: 0.9em;" class="form-control" id="cohort" name="cohort" placeholder="Enter the cohort size for this module" required aria-required="true" />
+      </div>
+      <div class="form-group">
+        <label for="newlessontypes">Lesson Types</label>
+        <div id="newlessontypes" style="display: flex;">
+          <select class="form-control" style="margin-right: 10px;" id="all_lesson_types_select">
+            <option value="LEC">LEC</option>
+            <option value="TUT">TUT</option>
+            <option value="LAB">LAB</option>
+            <option value="custom">Custom</option>
+          </select>
+          <button type="button" class="btn btn-secondary" onclick="new_lesson_type(this.parentNode)">Add</button>
+        </div>
+        <input class="form-control" type="text" id="custom_type_field" name="custom_type_field" placeholder="Custom lesson type name" style="margin: 10px 0px; display: none;" />
+      </div>
+
+      <button type="button" onclick="add_new_module(this);" class="btn btn-primary">Add Module</button>
+      <button type="submit" class="submit_btn" hidden></button>
+    </form>
+    <img src="/images/homepage_image_11.jpg" height="500" style="align-self: center; margin: 20px 0px;" />
+  </div>
+
+  <div class="modal fade" id="venues_modal" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal_title">Possible Venues Selection</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="possible_venues_list">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="save_venues(this);">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="groups_modal" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal_title">Groups Selection</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="group_list">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="save_groups(this);">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

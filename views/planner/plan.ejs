@@ -1,0 +1,75 @@
+<link href="https://fonts.googleapis.com/css?family=Overpass+Mono|Overpass:600|Open+Sans+Condensed:700|Poppins|Roboto|Montserrat" rel="stylesheet">
+<link href="/styles/planner/master.css" rel="stylesheet" />
+<link href="/styles/planner/planner.css" rel="stylesheet" />
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="/js/planner/master.js"></script>
+<script src="/js/planner/plan.js"></script>
+
+<div class="placeholder_main">
+  <div class="options_wrapper">
+    <p>
+      Legend:
+      <span style="background-color: #3a4660; color: white; padding: 3px;">LAB</span>
+      <span style="background-color: rgb(237, 138, 99); color: white; padding: 3px;">TUT</span>
+      <span style="background-color: #118798; color: white; padding: 3px;">LEC</span>
+    </p>
+    <div class="filter_wrapper">
+
+    </div>
+  </div>
+
+
+  <div class="planner">
+    <div id="weekly_planner">
+      <div class="header">
+        <p class="day_title" style="min-width: auto;">Day</p>
+        <p class="day_title" style="min-width: 80px;">Time</p>
+      </div>
+
+      <div class="planner_content">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add_event_modal" tabindex="-1" role="dialog" aria-labelledby="add_event_modal_title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="add_event_modal_title">Add Lesson</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="confirm_add_event();">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="edit_event_modal" tabindex="-1" role="dialog" aria-labelledby="add_event_modal_title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit_event_modal_title">Edit Lesson</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="confirm_edit_event();">Apply Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

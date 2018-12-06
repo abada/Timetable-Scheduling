@@ -1,0 +1,126 @@
+<script src="/js/venue/main.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="/styles/venue/master.css" />
+<link rel="stylesheet" href="/styles/venue/main.css" />
+
+<div class="colorbar">
+  <div class="contwrapper">
+    <p class="pagetitle">Venue Management</p>
+    <small style="font-family: Poppins;">View and edit venues in this webpage.</small>
+  </div>
+
+  <div class="btns-wrapper">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="export_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/images/icons/export.svg" />
+        <p style="margin-left: 5px;">Export</p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="export_dropdown_btn">
+        <a class="dropdown-item" onclick="export_to_excel();">To Excel</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="import_dropdown_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img src="/images/icons/import_2.svg" />
+        <p style="margin-left: 5px;">Import</p>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="import_dropdown_btn">
+        <a class="dropdown-item" onclick="select_file('#venue_file');">From Excel</a>
+      </div>
+    </div>
+
+    <form action="/venue/import_excel" enctype="multipart/form-data" method="POST">
+      <input type="file" id="venue_file" name="venueFile" onchange="submit_file($(this).siblings('input[type=submit]'))" formenctype="multipart/form-data" accept=".xlsx" style="display: none;" />
+      <input type="submit" id="venue_submit_btn" style="display: none;" />
+    </form>
+    <button onclick="window.location.href = '/venue/new_venue';" class="btn btn-primary">Add Venue</button>
+  </div>
+</div>
+
+<div class="content_placeholder" style="flex-grow: 1;">
+  <div class="group_list">
+    <% if (venues.length == 0) { %>
+    <p style="margin: 30px;">There are no existing venues, do you want to add them in the create page?</p>
+    <% } else { %>
+    <div class="group_header">
+      <p>Name</p>
+      <p>Type</p>
+      <p>Capacity</p>
+      <p>Actions</p>
+    </div>
+    <div class="group_items_container">
+      <% _.each(venues, function(venue, index) { %>
+      <div class="group_item">
+        <p class="venue_name" data-venueid="<%= venue.id %>"><%= venue.name %></p>
+        <p class="venue_type"><%= venue.type %></p>
+        <p class="venue_capacity"><%= venue.capacity %></p>
+        <div class="venue_actions">
+          <img id="venue_more_btn" src="/images/icons/more_3.svg" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" />
+          <div class="dropdown-menu edit-dropdown-menu" aria-labelledby="group_more_btn">
+            <button class="dropdown-item" type="button" onclick="edit_venue_details(this.parentNode.parentNode.parentNode);">Edit</button>
+            <button class="dropdown-item" type="button" onclick="delete_venue(this.parentNode.parentNode.parentNode);">Delete</button>
+          </div>
+        </div>
+      </div>
+      <% }); } %>
+    </div>
+  </div>
+  <img src="/images/homepage_image_9.jpg" height="400" style="align-self: center; margin: 20px 0px;"  />
+</div>
+
+
+<div class="modal fade" id="edit_group_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_label">Edit Venue Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="edit_venue_name">Venue Name</label>
+          <input type="text" style="font-size: 0.9em;" class="form-control" id="edit_venue_name" name="group_index" required aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="edit_venue_type">Venue Type</label>
+          <input type="text" style="font-size: 0.9em;" class="form-control" id="edit_venue_type" name="group_size" required aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="edit_venue_capacity">Venue Capacity</label>
+          <input type="number" style="font-size: 0.9em;" class="form-control" id="edit_venue_capacity" name="group_size" required aria-required="true" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="save_details_changes();">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="export_modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_label">Export Venues w/Details as Excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="total_venue_label"></p>
+        <div class="form-group">
+          <label for="file_name_input">Save As (Filename):</label>
+          <input type="text" class="form-control" id="export_filename" placeholder="TPS_Venue_Details (Leave blank as default)">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="exportAs()">Export</button>
+      </div>
+    </div>
+  </div>
+</div>

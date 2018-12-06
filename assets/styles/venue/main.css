@@ -1,0 +1,92 @@
+.content_placeholder {
+  justify-content: space-evenly;
+}
+
+.group_list {
+  width: 600px;
+  height: 500px;
+  margin: 20px 0px;
+  align-self: center;
+  background-color: white;
+  border-radius: 2%;
+  border: 1px solid #cccc;
+  font-family: Poppins;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+}
+
+.group_header {
+  display: grid;
+  grid-template-columns: 40% 25% 25% 10%;
+  font-weight: bold;
+  background-color: #c0c0c0;
+  padding: 25px;
+}
+
+.group_items_container {
+  overflow: auto;
+}
+
+.group_item {
+  display: grid;
+  grid-template-columns: 40% 25% 25% 10%;
+  padding: 25px;
+  font-family: "Overpass Mono";
+}
+
+.group_item .venue_actions {
+  justify-self: center;
+}
+
+
+.edit-dropdown-menu {
+  min-width: 5rem;
+}
+
+
+
+/**
+  Edit Modal style
+ */
+#edit_group_modal .modal-title {
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#edit_group_modal .modal-body {
+  font-family: 'Overpass Mono', monospace;
+  font-size: 1em;
+  font-weight: lighter;
+}
+
+#edit_group_modal .modal-footer .btn {
+  font-family: "Poppins";
+}
+
+/**
+  Scrollbar style below
+ */
+.group_items_container:hover::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #F5F5F5;
+}
+.group_items_container:hover::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+.group_items_container::-webkit-scrollbar {
+  width: 8px;
+  background-color: #F5F5F5;
+}
+.group_items_container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+.group_items_container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);
+  background-color: rgba(200,200,200,0.1);
+}
