@@ -38,6 +38,11 @@ module.exports.routes = {
     action: 'create',
   },
 
+  '/staff/show': {
+    controller: 'Staff',
+    action: 'show',
+  },
+
   '/staff/update': {
     controller: 'Staff',
     action: 'update',
@@ -56,6 +61,11 @@ module.exports.routes = {
   '/staff/assign_module': {
     controller: 'StaffModules',
     action: 'create',
+  },
+
+  '/staff/get_assigned_module': {
+    controller: 'StaffModules',
+    action: 'show',
   },
 
   '/staff/unassign_module': {
@@ -123,6 +133,11 @@ module.exports.routes = {
     action: 'create',
   },
 
+  '/group/show': {
+    controller: 'Group',
+    action: 'show',
+  },
+
   '/group/update': {
     controller: 'Group',
     action: 'update',
@@ -158,6 +173,11 @@ module.exports.routes = {
     action: 'create',
   },
 
+  '/venue/show': {
+    controller: 'Venue',
+    action: 'show',
+  },
+
   '/venue/update': {
     controller: 'Venue',
     action: 'update',
@@ -186,6 +206,11 @@ module.exports.routes = {
   '/lesson_types/get_all': {
     controller: 'LessonTypes',
     action: 'getAllTypes',
+  },
+
+  '/lesson_types/get_by_module': {
+    controller: 'LessonTypes',
+    action: 'getTypesByModule'
   },
 
   '/lesson_types/delete': {
@@ -220,6 +245,50 @@ module.exports.routes = {
 
   '/lesson/show': {
     controller: 'Lesson',
+    action: 'show',
+  },
+
+  '/lesson/update': {
+    controller: 'Lesson',
+    action: 'update',
+  },
+
+  '/lesson/delete': {
+    controller: 'Lesson',
+    action: 'destroy',
+  },
+
+  '/lesson/assign_staff': {
+    controller: 'LessonStaff',
+    action: 'create',
+  },
+
+  '/lesson/get_assigned_staff': {
+    controller: 'LessonStaff',
+    action: 'show',
+  },
+
+  '/lesson/unassign_staff': {
+    controller: 'LessonStaff',
+    action: 'destroy',
+  },
+
+
+  /**
+   * Possible Venues Related
+   */
+
+  '/possible_venues/show': {
+    controller: 'PossibleVenues',
+    action: 'show',
+  },
+
+  /**
+   * Possible Groups Related
+   */
+
+  '/possible_groups/show': {
+    controller: 'PossibleGroups',
     action: 'show',
   },
 

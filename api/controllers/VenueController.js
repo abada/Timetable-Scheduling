@@ -96,6 +96,11 @@ module.exports = {
   },
 
   show: async function(req, res) {
+    let venue_id = req.param("venue_id");
+
+    let venue = venue_id == null ? await Venue.find({}) : await Venue.find({id: venue_id});
+
+    res.json(venue);
   },
 
   update: async function(req, res) {

@@ -122,11 +122,9 @@ module.exports = {
 
   show: async function(req, res) {
     let staff_id = req.param("staffid");
-    let promise_1 = staff_id == null ? Staff.find({}) : Staff.find({staff_id: staff_id});
+    let staffs = staff_id == null ? await Staff.find({}) : await Staff.find({staff_id: staff_id});
 
-    Promise.all([promise_1]).then(function(result) {
-      res.json(result);
-    });
+    res.json(staffs);
   },
 
   update: async function(req, res) {

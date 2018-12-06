@@ -94,11 +94,9 @@ module.exports = {
 
   show: async function(req, res) {
     let group_index = req.param("group_index");
-    let promise_1 = group_index == null ? Group.find({}) : Group.find({group_index: group_index});
+    let groups = group_index == null ? await Group.find({}) : await Group.find({group_index: group_index});
 
-    Promise.all([promise_1]).then(function(result) {
-      res.json(result);
-    });
+    res.json(groups);
   },
 
   update: async function(req, res) {

@@ -18,7 +18,6 @@ module.exports = {
     },
     teaching_weeks: {
       type: 'string',
-      required: true,
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

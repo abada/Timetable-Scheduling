@@ -18,6 +18,21 @@ module.exports = {
     res.json(staff_allocation);
   },
 
+  show: async function(req, res) {
+    let module_code = req.param("module_code");
+    let staff_id = req.param("staff_id");
+    let staffmodules;
+
+    if (module_code && staff_id)
+      staffmodules = await StaffModules.find({module_code: module_code, staff_id: staff_id}).populate("staff_id");
+    else if (module_code && !staff_id)
+      staffmodules = await StaffModules.find({module_code: module_code}).populate("staff_id");
+    else if (!module_code && staff_id)
+      staffmodules = await StaffModules.find({staff_id: staff_id}).populate("staff_id");
+
+    res.json(staffmodules);
+  },
+
   destroy: async function(req, res) {
     let staff_id = req.param("staff_id");
     let module_code = req.param("module_code");

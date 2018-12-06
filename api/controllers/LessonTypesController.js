@@ -13,6 +13,13 @@ module.exports = {
     res.json(types);
   },
 
+  getTypesByModule: async function(req, res) {
+    let module_code = req.param("module_code");
+    let lesson_types = await LessonTypes.find({module_code: module_code});
+
+    res.json(lesson_types);
+  },
+
   /**
    *   CRUD METHODS (FOR AJAX PURPOSES)
    */

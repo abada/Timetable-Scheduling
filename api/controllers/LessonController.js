@@ -112,18 +112,14 @@ module.exports = {
                 timeslots_id: timeslot.id,
                 lesson_details_id: lesson_detail.id,
               });
-
-              if (lesson)
-                affectedRows++;
             }
-
-            console.log(affectedRows);
           });
         }
         fs.unlink("assets/uploads/" + moduleFilename, function(err) {
           if (err)
             res.serverError(err);
         });
+
         res.redirect("/planner/by_timeslot");
       }
     });
@@ -160,11 +156,57 @@ module.exports = {
       lessons[i].start_time = timeslot.start_time;
       lessons[i].end_time = timeslot.end_time;
       lessons[i].module_code = ltype.module_code;
+      lessons[i].lesson_type_id = ltype.id;
       lessons[i].lesson_type = ltype.lesson_type;
       lessons[i].no_of_lessons = ldetails.no_of_lessons;
     }
 
     res.json(lessons);
+  },
+
+  update: async function(req, res) {
+    let lesson_id = req.param("lesson_id");
+    let study_year_sem = req.param("study_year_sem");
+    let module_code = req.param("module_code");
+    let lesson_day = req.param("lesson_day");
+    let start_time = req.param("start_time");
+    let duration = req.param("duration");
+    let lesson_type_id = req.param("lesson_type_id");
+    let venue_id = req.param("venue_id");
+    let group_index = req.param("group_index");
+    let school_weeks = req.param("school_weeks");
+
+    let lesson_details_id = (await LessonDetails.findOne({lesson_types_id: lesson_type_id})).id;
+    let end_time = (parseInt((start_time.split(":"))[0]) + parseInt(duration)).toString() + ":" + (start_time.split(":"))[1];
+    let timeslot = await Timeslots.findOrCreate({start_time: start_time, end_time: end_time}, {
+      start_time: start_time,
+      end_time: end_time,
+    });
+
+    let lesson = await Lesson.update({id: lesson_id }).set(
+      {
+        study_year_sem: study_year_sem,
+        module_code: module_code,
+        lesson_day: lesson_day,
+        school_weeks: school_weeks,
+        group_index: group_index,
+        venue_id: venue_id,
+        timeslots_id: timeslot.id,
+        lesson_details_id: lesson_details_id,
+      }).fetch();
+
+    if (lesson)
+      res.send("Update successfully!");
+  },
+
+  destroy: async function(req, res) {
+    let id = req.param("lesson_id");
+
+    if (id != null) {
+      let lesson = await Lesson.destroy({id: id}).fetch();
+
+      res.send([lesson]);
+    }
   },
 };
 
